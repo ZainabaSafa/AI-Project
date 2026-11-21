@@ -102,7 +102,7 @@ async def apply_migrations(client: SupabaseClient, reset: bool = False) -> None:
 
         # Execute the SQL
         try:
-            await client.client.rpc("execute_sql", {"query": sql})
+            client.client.rpc("execute_sql", {"query": sql}).execute()
             logger.info(f"Successfully applied migration: {migration_file.name}")
         except Exception as e:
             logger.error(f"Error applying migration {migration_file.name}: {e}")
